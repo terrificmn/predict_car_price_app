@@ -13,6 +13,7 @@ from sklearn.preprocessing import MinMaxScaler
 import pickle
 import joblib
 import re
+from PIL import Image # 이미지 처리 라이브러리
 
 from df_load_func import df_load 
 
@@ -83,7 +84,7 @@ def run_ml_app():
     worth = st.number_input('순 자산을 입력하세요', min_value=0)
 
     if st.button('예측하기'):
-        st.warning('아직 만드는 중입니다. ')
+        
 
         user_data = np.array( [ gender, age, salary, debt, worth ] )
 
@@ -104,5 +105,13 @@ def run_ml_app():
         y_pred_original = mm_y.inverse_transform(y_pred)
 
         # 결과 화면 출력
-        st.write('예측 결과 입니다. 당신은 %.0f 달러 정도의 자동차를 구매할 수 있습니다.' % y_pred_original[0, 0] )
+        st.write('예측 결과 입니다.') 
+        
+        #img = Image.open('data/image_03.jpg')
+        #st.image(img, use_column_width=True) # 이미지 화면에 표시
+        st.header('당신은 %.0f 달러의 자동차를 구매할 수 있습니다.' % y_pred_original[0, 0] )
+        
+        st.image('https://pixabay.com/get/gbc597cca876a94a895a4daa38f8b6e4c87efa168f60123c45465c08df568338ffba41ceaf74257cca54e894098a20421_1280.jpg') # 인터넷 URL을 적어줘도 된다
+        
+        #당신은 %.0f 달러 정도의 자동차를 구매할 수 있습니다.' % y_pred_original[0, 0] )
         
