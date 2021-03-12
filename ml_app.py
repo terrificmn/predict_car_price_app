@@ -104,6 +104,8 @@ def run_ml_app():
         #원래로 돌리기 
         y_pred_original = mm_y.inverse_transform(y_pred)
 
+        predictedCarPrice = y_pred_original[0, 0]
+
         # 결과 화면 출력
         st.write('예측 결과 입니다.') 
         
@@ -111,7 +113,13 @@ def run_ml_app():
         #st.image(img, use_column_width=True) # 이미지 화면에 표시
         st.header('당신은 %.0f 달러의 자동차를 구매할 수 있습니다.' % y_pred_original[0, 0] )
         
-        st.image('https://pixabay.com/get/gbc597cca876a94a895a4daa38f8b6e4c87efa168f60123c45465c08df568338ffba41ceaf74257cca54e894098a20421_1280.jpg') # 인터넷 URL을 적어줘도 된다
+
+        if (int(predictedCarPrice)) < 30000:
+            st.image('image/compact_1920.jpg')
         
-        #당신은 %.0f 달러 정도의 자동차를 구매할 수 있습니다.' % y_pred_original[0, 0] )
+        else:
+            # 비싼차
+            st.image('image/ferrari_1920.jpg') # 인터넷 URL을 적어줘도 된다
+            print('inside')
+            #당신은 %.0f 달러 정도의 자동차를 구매할 수 있습니다.' % y_pred_original[0, 0] )
         
